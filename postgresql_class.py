@@ -100,12 +100,12 @@ class PSQL:
         """
         if filename:
             # With user given filename
-            dataframe.to_csv(filename, header=False, index=True)
+            dataframe.to_csv(filename, header=False, index=False)
             stdin = open(filename, 'r', encoding='utf8')
         else:
             # With in-memory buffer
             stdin = io.StringIO()
-            dataframe.to_csv(stdin, header=False, index=True)
+            dataframe.to_csv(stdin, header=False, index=False)
             stdin.seek(0)
         # Using psycopg2 connection so that copy_expert method can be utilized for fast inserts
         con = psycopg2.connect(**self.params_dict)
