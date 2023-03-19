@@ -8,17 +8,6 @@ import sys
 from sqlalchemy import text
 
 
-start = date(2008, 1, 1)
-end = date.today()
-csv_file_name = '.statcast.csv'
-statcast_db_name = 'statcast'
-statcast_tbl_name = 'statcast_pitch'
-print('enter PSQL username:')
-user = input()
-print(f'enter password for {user}:')
-pw = input()
-
-
 def generate_statcast_csv(start_date, end_date, filename):
     first_insert = True
     for y in range(start_date.year, end_date.year+1):
@@ -52,6 +41,16 @@ def create_tbl_from_csv_sample(filename, tbl_name, psql):
 
 
 if __name__ == "__main__":
+
+    start = date(2008, 1, 1)
+    end = date.today()
+    csv_file_name = '.statcast.csv'
+    statcast_db_name = 'statcast'
+    statcast_tbl_name = 'statcast_pitch'
+    print('enter PSQL username:')
+    user = input()
+    print(f'enter password for {user}:')
+    pw = input()
 
     # generate csv with entire dataset
     generate_statcast_csv(start_date=start, end_date=end, filename=csv_file_name)
