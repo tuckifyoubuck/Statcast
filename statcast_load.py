@@ -37,10 +37,6 @@ def generate_statcast_csv(start_date, end_date, filename):
                     df_temp.to_csv(path_or_buf=filename, header=False, mode='a', index=False)
 
 
-def create_statcast_db(dbname, psql):
-    psql.create_new_db(dbname=dbname)
-
-
 def create_tbl_from_csv_sample(filename, tbl_name, psql):
     n = sum(1 for line in open(filename)) - 1  # number of records in file (excluding header)
     s = 10000  # desired sample size
@@ -63,7 +59,7 @@ if __name__ == "__main__":
 
     # create db
     old_db = PSQL(user=user, password=pw)
-    create_statcast_db(dbname=statcast_db_name, psql=old_db)
+    old_db.create_new_db(dbname=statcast_db_name)
 
     # create table from random sample
     # this is to prevent creating the table based on old data with empty columns or new data with empty columns
